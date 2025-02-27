@@ -5,6 +5,11 @@ vim.g.maplocalleader = ' '
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
+vim.keymap.set('n', '<A-k>', ':m .-2<CR>==')
+vim.keymap.set('n', '<A-j>', ':m .+1<CR>==')
+vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv")
+vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv")
+
 -- Save file when exiting insert mode
 vim.keymap.set('i', '<Esc>', '<Esc>:w<Enter>', { desc = 'save file after exiting insert' })
 -- Exit files
