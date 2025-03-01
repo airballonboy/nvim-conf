@@ -1,6 +1,6 @@
-require 'settings' -- Loads lua/settings.lua
 require 'keymaps' -- Loads lua/keymaps.lua
 require 'plugins' -- Loads lua/plugins.lua
+require 'settings' -- Loads lua/settings.lua
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
@@ -43,7 +43,7 @@ vim.opt.timeoutlen = 300
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
-
+require('nvim-treesitter.install').compilers = { 'cl' }
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`

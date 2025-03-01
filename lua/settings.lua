@@ -18,6 +18,16 @@ vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
+-- ColorScheme settings
+require('vscode').setup {
+  -- Enable transparent background (optional)
+  transparent = false,
+
+  -- Override specific colors
+  color_overrides = {},
+}
+vim.cmd 'colorscheme vscode'
+
 -- Global tab settings
 vim.opt.tabstop = 4 -- Number of spaces that a <Tab> counts for
 vim.opt.shiftwidth = 4 -- Number of spaces to use for autoindent
