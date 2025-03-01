@@ -13,6 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 --    :Lazy
 
 -- [[ Configure and install plugins ]]
+
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   -- NOTE: Here is where you install your plugins.
@@ -42,6 +43,7 @@ require('lazy').setup({
   --
   -- Use the `dependencies` key to specify the dependencies of a particular plugin
 
+  { 'Mofiqul/vscode.nvim' },
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -652,12 +654,12 @@ require('lazy').setup({
       }
     end,
   },
-	{
-		'clearaspect/onehalf',
-		lazy = false,
-		priority = 1000,
-	},
-	{ "shaunsingh/nord.nvim" },
+  {
+    'clearaspect/onehalf',
+    lazy = false,
+    priority = 1000,
+  },
+  { 'shaunsingh/nord.nvim' },
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is.
