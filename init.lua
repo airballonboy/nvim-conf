@@ -43,7 +43,7 @@ vim.opt.timeoutlen = 300
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
-require('nvim-treesitter.install').compilers = { 'cl' }
+require('nvim-treesitter.install').compilers = { 'cl', 'gcc'}
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`

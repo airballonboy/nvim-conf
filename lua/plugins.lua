@@ -655,7 +655,7 @@ require('lazy').setup({
     end,
   },
   {
-    'clearaspect/onehalf',
+  'clearaspect/onehalf',
     lazy = false,
     priority = 1000,
   },
