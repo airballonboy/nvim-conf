@@ -29,9 +29,10 @@ require('vscode').setup {
 vim.cmd 'colorscheme vscode'
 
 -- Global tab settings
-vim.opt.tabstop = 4 -- Number of spaces that a <Tab> counts for
-vim.opt.shiftwidth = 4 -- Number of spaces to use for autoindent
-vim.opt.expandtab = false -- Use spaces instead of tabs
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
 
 -- Keep signcolumn on by default
 vim.opt.signcolumn = 'yes'
@@ -62,5 +63,17 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
+  end,
+})
+-- :T for terminal time
+-- for gpt o4-mini so if any bad blame AI
+vim.api.nvim_create_user_command('T', function(opts)
+  local args = opts.fargs
+  local cmd = 'time ' .. table.concat(args, ' ')
+  vim.cmd('term ' .. cmd)
+end, {
+  nargs = '*',
+  complete = function(ArgLead, CmdLine, CursorPos)
+    return vim.fn.getcompletion(ArgLead, 'file')
   end,
 })

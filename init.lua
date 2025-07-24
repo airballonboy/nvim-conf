@@ -15,6 +15,35 @@ require 'settings' -- Loads lua/settings.lua
 -- Displays which-key popup sooner
 vim.opt.timeoutlen = 300
 
+--vim.filetype.add {
+--  extension = {
+--    mlang = 'mlang',
+--  },
+--}
+--
+--require('nvim-treesitter.configs').setup {
+--  playground = {
+--    enable = true,
+--    updatetime = 25,
+--  },
+--}
+--local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+--parser_config.mlang = {
+--  install_info = {
+--    url = '/home/ahmed/.local/share/tree-sitter-grammars/tree-sitter-mlang', -- full path to your repo
+--    files = { 'src/parser.c' },
+--    branch = 'main', -- or "master", depends on your repo
+--  },
+--  filetype = 'mlang',
+--}
+--require('nvim-treesitter.configs').setup {
+--  ensure_installed = { 'mlang', 'c', 'lua', 'python' },
+--  highlight = {
+--    enable = true,
+--    additional_vim_regex_highlighting = false,
+--  },
+--}
+
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
@@ -43,7 +72,7 @@ vim.opt.timeoutlen = 300
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
-require('nvim-treesitter.install').compilers = { 'cl', 'gcc'}
+require('nvim-treesitter.install').compilers = { 'cl', 'gcc' }
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`

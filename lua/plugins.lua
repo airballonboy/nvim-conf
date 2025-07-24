@@ -42,7 +42,19 @@ require('lazy').setup({
   -- you do for a plugin at the top level, you can do for a dependency.
   --
   -- Use the `dependencies` key to specify the dependencies of a particular plugin
-
+  {
+    'nvim-treesitter/playground',
+    cmd = 'TSPlaygroundToggle',
+    config = function()
+      require('nvim-treesitter.configs').setup {
+        playground = {
+          enable = true,
+          updatetime = 25,
+          persist_queries = false,
+        },
+      }
+    end,
+  },
   { 'Mofiqul/vscode.nvim' },
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -295,9 +307,37 @@ require('lazy').setup({
       --
       --
       require('lspconfig').clangd.setup {
-        cmd = { 'clangd' },
+        cmd = {
+          'clangd',
+          '--query-driver=/usr/local/bin/g++',
+          '--background-index',
+          '--clang-tidy',
+          '--header-insertion=never',
+        },
         filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
         root_dir = require('lspconfig').util.root_pattern('compile_commands.json', '.git'),
+        handlers = {
+          ['textDocument/publishDiagnostics'] = function(err, result, ctx, config)
+            if err or not result then
+              vim.lsp.handlers['textDocument/publishDiagnostics'](err, result, ctx, config)
+              return
+            end
+
+            local workspace = vim.loop.cwd()
+            local filtered_diagnostics = {}
+
+            -- Filter diagnostics: keep only those inside workspace directory
+            for _, diagnostic in ipairs(result.diagnostics) do
+              local uri_path = vim.uri_to_fname(result.uri)
+              if uri_path:find(workspace, 1, true) == 1 then
+                table.insert(filtered_diagnostics, diagnostic)
+              end
+            end
+
+            result.diagnostics = filtered_diagnostics
+            vim.lsp.handlers['textDocument/publishDiagnostics'](err, result, ctx, config)
+          end,
+        },
       }
 
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -655,7 +695,7 @@ require('lazy').setup({
     end,
   },
   {
-  'clearaspect/onehalf',
+    'clearaspect/onehalf',
     lazy = false,
     priority = 1000,
   },
